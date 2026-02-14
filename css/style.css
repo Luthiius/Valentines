@@ -1,0 +1,733 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 120, 170, 0.35) 0%, transparent 22%),
+        radial-gradient(circle at 80% 10%, rgba(255, 90, 150, 0.28) 0%, transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(255, 130, 170, 0.2) 0%, transparent 24%),
+        linear-gradient(135deg, #5a001f 0%, #8d0033 35%, #b10345 68%, #cc1f62 100%);
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    padding: 20px;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.3) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.24) 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 25%, rgba(255, 255, 255, 0.2) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.24) 0 2px, transparent 3px),
+        radial-gradient(circle at 90% 35%, rgba(255, 255, 255, 0.16) 0 2px, transparent 3px);
+    z-index: 0;
+}
+
+.container {
+    text-align: center;
+    animation: float 3s ease-in-out infinite;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.step {
+    display: none;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 210, 230, 0.5);
+    border-radius: 28px;
+    padding: 28px 30px;
+    box-shadow:
+        0 18px 45px rgba(80, 0, 28, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+}
+
+.step.active {
+    display: block;
+    animation: fadeStep 0.45s ease;
+}
+
+@keyframes fadeStep {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.cat-img {
+    width: 300px;
+    height: 300px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 10px 30px rgba(255, 182, 229, 0.6));
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    font-size: 24px;
+    color: #ff6b81;
+    animation: fall linear infinite;
+    text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+h1 {
+    font-size: 3em;
+    background: linear-gradient(45deg, #ffd2e6, #ffe9f3, #ffd9ec, #fff5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 40px;
+    text-shadow: 0 4px 24px rgba(45, 0, 18, 0.25);
+    animation: pulse 2s ease-in-out infinite;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.buttons {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.step4-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 18px 45px;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    width: auto;
+    min-width: 180px;
+    margin: 5px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #ff86b8 0%, #ff3f7f 60%, #d3125d 100%);
+    color: white;
+    box-shadow: 0 10px 28px rgba(180, 14, 80, 0.45);
+}
+
+.btn-yes:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(255, 73, 139, 0.65);
+}
+
+.btn-no {
+    background: linear-gradient(135deg, #ffd6e8 0%, #ff9fc5 100%);
+    color: #9e114d;
+    box-shadow: 0 8px 25px rgba(255, 158, 201, 0.42);
+}
+
+.step3-note-wrap {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    perspective: 1000px;
+}
+
+.step3-note-paper {
+    position: relative;
+    min-height: 260px;
+    padding: 34px 32px;
+    border-radius: 16px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 181, 209, 0.24) 0px,
+            rgba(255, 181, 209, 0.24) 1px,
+            transparent 1px,
+            transparent 36px
+        ),
+        linear-gradient(170deg, #fffafc 0%, #fff2f7 100%);
+    border: 2px solid rgba(255, 174, 210, 0.7);
+    box-shadow:
+        0 16px 35px rgba(71, 0, 28, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+    transform-origin: top center;
+    animation: step3PaperEnter 0.65s ease;
+}
+
+.step3-note-paper::before {
+    content: '💌';
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 24px;
+    opacity: 0.5;
+}
+
+.step3-note-text {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    min-height: 180px;
+    text-align: left;
+    font-family: 'Lovers Quarrel', cursive;
+    font-size: clamp(24px, 3.1vw, 37px);
+    line-height: 1.45;
+    color: #b11659;
+}
+
+.step3-note-text.typing::after {
+    content: '|';
+    margin-left: 4px;
+    animation: step3CursorBlink 0.75s steps(1) infinite;
+}
+
+.step3-signature {
+    margin-top: 18px;
+    text-align: right;
+    font-family: 'Lovers Quarrel', cursive;
+    font-size: clamp(26px, 3vw, 40px);
+    color: #c41a62;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+#step3Buttons {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+#step3Buttons.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes step3PaperEnter {
+    from {
+        opacity: 0;
+        transform: rotateX(-18deg) translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0deg) translateY(0);
+    }
+}
+
+@keyframes step3CursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Game styles */
+.game-container {
+    position: relative;
+    margin: 20px auto;
+    width: min(400px, 100%);
+}
+
+#gameCanvas {
+    border: 3px solid #ff69b4;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe0e9 100%);
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+    cursor: none;
+    touch-action: none;
+}
+
+.game-instruction {
+    font-size: 16px;
+    color: #ffd8eb;
+    margin: 10px 0 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.game-score {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 24px;
+    color: #ffe7f4;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+/* Book wrapper */
+.book-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.book {
+    perspective: 250vw;
+}
+
+.book .pages {
+    width: 80vw;
+    height: 58vw;
+    max-width: 800px;
+    max-height: 580px;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow:
+        0 24px 45px rgba(93, 0, 38, 0.35),
+        0 0 30px rgba(255, 170, 212, 0.18);
+}
+
+.book .page {
+    position: absolute;
+    top: 0;
+    width: 40vw;
+    max-width: 400px;
+    height: 58vw;
+    max-height: 580px;
+    transform-origin: 0 0;
+    transition: transform 1.4s;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    user-select: none;
+    background-color: #fff9fc;
+    border: 1px solid rgba(233, 159, 185, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book .page:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.7s;
+    z-index: 2;
+}
+
+.book .page:nth-child(odd) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+    right: 0;
+    border-radius: 0 12px 12px 0;
+    background-image: linear-gradient(to right, rgba(133, 39, 84, 0.18) 0%, rgba(0, 0, 0, 0) 11%);
+}
+
+.book .page:nth-child(odd):hover {
+    transform: rotateY(-15deg);
+}
+
+.book .page:nth-child(odd):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page:nth-child(even) {
+    pointer-events: none;
+    transform: rotateY(180deg);
+    transform-origin: 100% 0;
+    left: 0;
+    border-radius: 12px 0 0 12px;
+    background-image: linear-gradient(to left, rgba(133, 39, 84, 0.15) 0%, rgba(0, 0, 0, 0) 11%);
+}
+
+.book .page:nth-child(even):before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.book .page.flipped:nth-child(odd) {
+    pointer-events: none;
+    transform: rotateY(-180deg);
+}
+
+.book .page.flipped:nth-child(odd):before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.book .page.flipped:nth-child(even) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+}
+
+.book .page.flipped:nth-child(even):hover {
+    transform: rotateY(15deg);
+}
+
+.book .page.flipped:nth-child(even):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page.flipped:nth-child(even):before {
+    background: rgba(0, 0, 0, 0);
+}
+
+.book .cover-page {
+    cursor: pointer;
+    color: #fff;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 14px;
+    border: 2px solid #a5366f;
+    background:
+        radial-gradient(circle at 14% 20%, rgba(255, 203, 223, 0.22) 0 7px, transparent 8px),
+        radial-gradient(circle at 84% 16%, rgba(255, 203, 223, 0.22) 0 7px, transparent 8px),
+        radial-gradient(circle at 24% 78%, rgba(255, 203, 223, 0.22) 0 7px, transparent 8px),
+        radial-gradient(circle at 76% 84%, rgba(255, 203, 223, 0.22) 0 7px, transparent 8px),
+        linear-gradient(135deg, #ff6ba5 0%, #dc4b88 46%, #b33672 100%);
+    box-shadow:
+        0 18px 35px rgba(156, 39, 92, 0.35),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.16),
+        inset -10px 0 20px rgba(110, 17, 60, 0.25);
+    transition: transform 1.4s, width 0.45s ease, left 0.45s ease, right 0.45s ease, border-radius 0.45s ease;
+}
+
+.book .cover-page p {
+    color: #fff5fb;
+    text-shadow: 0 3px 12px rgba(95, 12, 52, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Closed state: hide inside pages */
+.book .left-page,
+.book .right-page {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+/* Open state: cover becomes right half and inside pages appear */
+.book .cover-page.flipped {
+    width: 40vw;
+    max-width: 400px;
+    left: auto;
+    right: 0;
+    border-radius: 0 12px 12px 0;
+}
+
+.book .cover-page.flipped ~ .left-page,
+.book .cover-page.flipped ~ .right-page {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Page content styling */
+.book .page p {
+    margin-top: 0;
+    text-align: center;
+    font-size: clamp(20px, 3vw, 32px);
+    color: #000000;
+    font-family: 'Lovers Quarrel', cursive;
+    padding: 30px;
+    z-index: 1;
+    position: relative;
+}
+
+/* Quote page styling */
+.book .page.quote-page {
+    background-color: #fffafc;
+    background-image:
+        linear-gradient(to right, rgba(255, 176, 206, 0.24) 0%, rgba(255, 194, 218, 0) 11%),
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 205, 224, 0.25) 0px,
+            rgba(255, 205, 224, 0.25) 1px,
+            transparent 1px,
+            transparent 34px
+        );
+}
+
+.book .page.quote-page p {
+    font-size: clamp(18px, 2.5vw, 28px);
+    line-height: 1.8;
+    color: #6f2a51;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Photo page styling */
+.book .page.photo-page {
+    background-color: #fff9fc;
+    background-image: linear-gradient(to left, rgba(255, 176, 206, 0.22) 0%, rgba(255, 194, 218, 0) 11%);
+    padding: 20px;
+}
+
+.book .page.photo-page .photo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+.book .page.photo-page .photo {
+    width: 85%;
+    max-width: 320px;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(114, 42, 76, 0.24);
+    border: 5px solid #fff;
+}
+
+.book .page.photo-page .photo:nth-child(1) {
+    transform: rotate(-2deg);
+}
+
+.book .page.photo-page .photo:nth-child(2) {
+    transform: rotate(2deg);
+}
+
+.final-message {
+    display: none;
+    color: #fff3fa;
+    font-size: 2em;
+    margin-top: 30px;
+    animation: fadeIn 1.5s ease-in;
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(145deg, rgba(255, 128, 180, 0.24), rgba(255, 74, 139, 0.2));
+    border-radius: 20px;
+    border: 1px solid rgba(255, 203, 227, 0.55);
+    box-shadow:
+        0 16px 35px rgba(75, 0, 28, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.final-message p {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    body::before,
+    body::after,
+    .container::before,
+    .container::after {
+        font-size: 40px;
+    }
+
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    .cat-img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .btn {
+        padding: 15px 35px;
+        font-size: 1.1em;
+        min-width: 160px;
+    }
+
+    .book {
+        width: 85vw;
+        height: 62vw;
+        max-width: 500px;
+        max-height: 365px;
+    }
+
+    .book .page p {
+        font-size: clamp(16px, 3.5vw, 22px);
+    }
+
+    .book .page.quote-page p {
+        font-size: clamp(14px, 3vw, 20px);
+    }
+
+    .photo {
+        max-width: 250px;
+        max-height: 180px;
+    }
+
+    .step3-note-paper {
+        min-height: 236px;
+        padding: 28px 26px;
+    }
+
+    .game-score {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body::before,
+    body::after,
+    .container::before,
+    .container::after {
+        font-size: 30px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .cat-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .buttons {
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1em;
+        min-width: 140px;
+    }
+
+    .final-message {
+        font-size: 1.4em;
+        padding: 25px;
+    }
+
+    .left-page p {
+        font-size: 16px;
+    }
+
+    .book {
+        width: 90vw;
+        height: 65vw;
+        max-width: 450px;
+        max-height: 325px;
+    }
+
+    .book .page p {
+        font-size: clamp(14px, 4vw, 18px);
+    }
+
+    .book .page.quote-page p {
+        font-size: clamp(12px, 3.5vw, 16px);
+    }
+
+    .step3-note-paper {
+        min-height: 220px;
+        padding: 24px 20px;
+    }
+
+    .step3-note-text {
+        min-height: 160px;
+        line-height: 1.5;
+    }
+
+    .game-instruction {
+        font-size: 14px;
+    }
+
+    .game-score {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .cat-img {
+        width: 180px;
+        height: 180px;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        margin-bottom: 15px;
+    }
+
+    .buttons {
+        margin-bottom: 15px;
+    }
+
+    .book {
+        height: 50vw;
+        max-height: 300px;
+    }
+}

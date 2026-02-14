@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine Baby?</title>
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Lovers+Quarrel" rel="stylesheet">
+<!-- Icon -->
+<link rel="icon" href="./images/heart.gif" type="image/gif">
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<div class="hearts"></div>
+<div class="container">
+<!-- Step 1 -->
+<div class="step active" id="step1">
+<img src="./images/photo 1.gif" alt="Photo 1" class="cat-img">
+<h1>Will you be my Valentine? 💝</h1>
+<div class="buttons">
+<button class="btn btn-yes" onclick="goToStep2()">YES!</button>
+<button class="btn btn-no" onmouseover="moveButton(this)" onclick="moveButton(this)">Ewh...</button>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="step" id="step2">
+<img src="./images/transparent bunny.gif" alt="Transparent Bunny" class="cat-img">
+<h1>Are you sure about that</h1>
+<div class="buttons">
+<button class="btn btn-yes" onclick="goToStep3()">Yes, 100% Sure</button>
+<button class="btn btn-no" onmouseover="moveButton(this)" onclick="moveButton(this)">Ummm...</button>
+</div>
+</div>
+<!-- Step 1.5 - Heart Catching Game -->
+<div class="step" id="step1-5">
+<h1>Catch my hearts! 💕</h1>
+<p class="game-instruction">Use arrow keys or click/tap to move. Catch 15 hearts!</p>
+<div class="game-container">
+<canvas id="gameCanvas"></canvas>
+<div class="game-score">
+<span>Hearts: <span id="score">0</span>/15</span>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="step" id="step3">
+<img src="./images/bunny holding book.gif" alt="Bunny Holding Book" class="cat-img">
+<h1>A message from my heart... 💌</h1>
+<div class="step3-note-wrap">
+<div class="step3-note-paper">
+<p class="step3-note-text" id="step3TypingText"></p>
+<p class="step3-signature" id="step3Signature">Forever yours ❤️</p>
+</div>
+</div>
+<div class="buttons" id="step3Buttons">
+<button class="btn btn-yes" onclick="goToStep4()">Continue 💕</button>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="step" id="step4">
+<div class="book-wrapper">
+<div class="book" id="book">
+<div id="pages" class="pages">
+<div class="page cover-page"><p>Open Me,<br>please! 💕</p></div>
+<div class="page photo-page left-page">
+<div class="photo-container">
+<img src="./images/kissing.JPG" alt="Memory 1" class="photo">
+<img src="./images/Frame%20photos.PNG" alt="Memory 2" class="photo">
+</div>
+</div>
+<div class="page quote-page right-page">
+<p>
+From the moment you came into my life, everything felt warmer.<br><br>
+You make the hard days softer and the good days unforgettable.<br><br>
+I promise to choose you, support you, and love you - always.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="step4-buttons">
+<div class="buttons" id="closeBookButton" style="display: none;">
+<button class="btn btn-yes" onclick="closeBook()">Close Book 💌</button>
+</div>
+</div>
+</div>
+<div class="final-message">
+<img src="./images/hearts floating.gif" alt="Cute Cat in Love" class="cat-img">
+<p>You make each day special.</p>
+<p style="margin-top: 15px;"></p>
+</div>
+</div>
+<script src="./js/script.js"></script>
+</body>
+</html>
